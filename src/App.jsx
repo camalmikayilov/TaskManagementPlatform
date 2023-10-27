@@ -10,10 +10,10 @@ const App = () => {
     <div>
        <div>
        <h1>Task Manager App</h1>
-       <button>Sign In</button>
-       <button>Sign Up</button>
-       <button>Create Organization</button>
-       <button>Create User</button>
+       <button className="signin-btn">Sign In</button>
+       <button className="signup-btn">Sign Up</button>
+       <button className="create-org-btn">Create Organization</button>
+       <button className="create-user-btn">Create User</button>
        <SignInForm />
        <SignUpForm />
        <TaskManagement />

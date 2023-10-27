@@ -118,4 +118,45 @@ body {
     border-radius: 5px;
     cursor: pointer;
   }
+
+
+ .signin-btn,
+ .signup-btn,
+ .create-org-btn,
+ .create-user-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+ }
+
+ .signin-btn {
+    background-color: #007bff;
+    color: white;
+ }
+
+ .signin-btn:hover {
+    background-color: #0056b3;
+ }
+
+ .signup-btn {
+    background-color: #28a745;
+    color: white;
+ }
+
+ .signup-btn:hover {
+    background-color: #218838;
+ }
+
+ .create-org-btn,
+ .create-user-btn {
+    background-color: #17a2b8;
+    color: white;
+ }
+
+ .create-org-btn:hover,
+ .create-user-btn:hover {
+    background-color: #147a9e;
+ }
   
