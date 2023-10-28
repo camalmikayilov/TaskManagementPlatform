@@ -10,25 +10,40 @@ const SignInForm = () => {
 
   // State for managing pop-up visibility
   const [showPopup, setShowPopup] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   // Handling form submission for sign-in
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Retrieving and updating signInData from local storage
-    var signInData = JSON.parse(localStorage.getItem('signIndata') || "[]");
-    signInData.push(signivalues);
-    localStorage.setItem('signIndata', JSON.stringify(signInData));
-    setShowPopup(true); // Show the pop-up on successful sign-in
+    if (signivalues.password.length < 6) {
+      setShowAlert(true);
+    } else {
+      // Retrieving and updating signInData from local storage
+      var signInData = JSON.parse(localStorage.getItem('signIndata') || "[]");
+      signInData.push(signivalues);
+      localStorage.setItem('signIndata', JSON.stringify(signInData));
+      setShowPopup(true); // Show the pop-up on successful sign-in
+    }
   };
 
   // Handling changes in the sign-in form input fields
   const handleSignIn = (e) => {
-    setSignValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    if (e.target.name === 'password' && e.target.value.length < 6) {
+      setShowAlert(true);
+    } else {
+      setSignValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+      setShowAlert(false);
+    }
   };
 
   // Rendering the sign-in form and pop-up
   return (
     <div>
+      {showAlert && (
+        <div className="alert">
+          Password should be at least 6 characters long and alphanumeric
+        </div>
+      )}
       <form className="signin-form" onSubmit={handleSubmit}>
         {/* Input fields for sign-in information */}
         <input
@@ -45,12 +60,12 @@ const SignInForm = () => {
           className="signin-input"
           name="password"
         />
-        <button type="submit" className="signin-button"> {/* Button for signing in */}
+        <button type="submit" className="signin-button">
           Sign In
         </button>
       </form>
       {showPopup && (
-        <div className="popup"> {/* Pop-up for successful login */}
+        <div className="popup">
           <div className="popup-content">
             <p>Successful Login!</p>
             <button onClick={() => setShowPopup(false)}>Close</button>
