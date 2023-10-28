@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
+// TaskManagement component
 const TaskManagement = () => {
+  // State for managing task values
   const [taskvalues, setTaskValues] = useState({
     title: '',
     description: '',
@@ -8,15 +10,18 @@ const TaskManagement = () => {
     stat: ''
   });
 
+  // State for storing tasks and all task data
   const [tasks, setTasks] = useState([]);
   const [allTaskData, setAllTaskData] = useState([]);
 
+  // Fetching data from local storage on initial render
   useEffect(() => {
     const taskData = JSON.parse(localStorage.getItem('taskdata')) || [];
     setAllTaskData(taskData);
     setTasks(taskData); // Set tasks from localStorage data
   }, []);
 
+  // Handling form submission for adding tasks
   const handleSubmit = (e) => {
     e.preventDefault();
     const taskData = [...allTaskData, taskvalues];
@@ -31,11 +36,13 @@ const TaskManagement = () => {
     });
   };
 
+  // Handling changes in task input fields
   const handleAddTask = (e) => {
     const { name, value } = e.target;
     setTaskValues((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Handling the deletion of a task
   const handleDeleteTask = (index) => {
     const updatedTasks = tasks.filter((_, i) => i !== index);
     setTasks(updatedTasks);
@@ -43,13 +50,16 @@ const TaskManagement = () => {
     localStorage.setItem('taskdata', JSON.stringify(updatedTasks));
   };
 
+  // Handling the addition of a user
   const handleAddUser = () => {
     // Add your logic here for adding a user
     console.log("Add User logic here");
   };
 
+  // Rendering the TaskManagement component
   return (
     <div>
+        {/* Form for adding tasks */}
         <form className="task-form" onSubmit={handleSubmit}>
         <input
           type="text"
@@ -86,6 +96,7 @@ const TaskManagement = () => {
           Add Task
         </button>
       </form>
+      {/* Displaying the list of tasks */}
       <div>
         {tasks.length > 0 && (
           <table>

@@ -1,7 +1,9 @@
 import { useState } from "react";
 
+// UserManagement component
 const UserManagement = () => {
 
+  // Setting initial state for user values using useState hook
   const [uservalues, setUserValues] = useState({
     name: "",
     surname: "",
@@ -9,19 +11,24 @@ const UserManagement = () => {
     defaultPassword: "",
   });
 
+  // Handling form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Retrieving and updating usersData from local storage
     var usersData = JSON.parse(localStorage.getItem("usersdata") || "[]");
     usersData.push(uservalues);
     localStorage.setItem("usersdata", JSON.stringify(usersData));
   };
 
+  // Handling user input changes
   const handleAddUser = (e) => {
-    setUserValues((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
+    setUserValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  // Rendering the form
   return (
     <form className="user-form" onSubmit={handleSubmit}>
+      {/* Input fields for user information */}
       <input
         type="text"
         placeholder="Name"
@@ -50,7 +57,7 @@ const UserManagement = () => {
         className="user-input"
         name="defaultPassword"
       />
-      <button type="submit" className="user-button">
+      <button type="submit" className="user-button"> {/* Button for adding user */}
         Add User
       </button>
     </form>

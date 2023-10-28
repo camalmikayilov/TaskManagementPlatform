@@ -1,31 +1,36 @@
 import { useState } from 'react';
 
+// SignUpForm component
 const SignUpForm = () => {
 
+  // State for managing sign up form values
   const [signvalues, setSignValues] = useState({
     email: '',
     password: '',
     username: '',
-    adress: '',
+    address: '',
     phoneNumber: '',
     organizationName: ''
-  })
+  });
 
+  // Handling form submission for signing up
   const handleSubmit = (e) => {
     e.preventDefault();
-    // DATANI BIRINCI CEKIB YOXLAMALISAN OLMASA ELAVE ETMELISEN LOKALA - Yoxsa her defe yeni data elave edende digerini silecek. O birisi sehifelerde de bu versiyani iwlet
+    // Retrieving and updating signData from local storage
     var signData = JSON.parse(localStorage.getItem('signdata') || "[]");
-    signData.push(signvalues)
-    localStorage.setItem('signdata', JSON.stringify(signData))
-  }
-
-  // ONCHANGE VERDIM BULARI DAHA RAHAT YOLDU. COX DATA OLANDA STATELER QARIWIR ONA GORE SENIN STATELERI COMMENTE ALDM 1-NE YIGDIM.
-  const handleSignUp = (e) => {
-    setSignValues(prev => ({ ...prev, [e.target.name]: [e.target.value] }))
+    signData.push(signvalues);
+    localStorage.setItem('signdata', JSON.stringify(signData));
   };
 
+  // Handling changes in the sign up form input fields
+  const handleSignUp = (e) => {
+    setSignValues(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  // Rendering the sign up form
   return (
     <form className="signup-form" onSubmit={handleSubmit}>
+      {/* Input fields for sign up information */}
       <input
         type="text"
         placeholder="Organization Name"
@@ -45,7 +50,7 @@ const SignUpForm = () => {
         placeholder="Address"
         onChange={handleSignUp}
         className="signup-input"
-        name='adress'
+        name='address'
       />
       <input
         type="text"
@@ -68,7 +73,7 @@ const SignUpForm = () => {
         className="signup-input"
         name='password'
       />
-      <button type="submit" className="signup-button">
+      <button type="submit" className="signup-button"> {/* Button for signing up */}
         Sign Up
       </button>
     </form>
