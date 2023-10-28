@@ -1,44 +1,46 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { useState } from 'react';
 
-const SignInForm = ({ signIn }) => {
- const [email, setEmail] = React.useState('');
- const [password, setPassword] = React.useState('');
+const SignInForm = () => {
+//  const [email, setEmail] = React.useState('');
+//  const [password, setPassword] = React.useState('');
 
- const handleSignIn = (e) => {
+  const [signivalues, setSignValues] = useState({
+  email: '',
+  password: ''
+  })
+
+ const handleSubmit = (e) => {
     e.preventDefault();
-    const signInData = {
-      email,
-      password,
+      var signInData  = JSON.parse(localStorage.getItem('signIndata') || "[]");
+      signInData.push(signivalues)
+      localStorage.setItem('signIndata', JSON.stringify(signInData))
+    }
+    
+    const handleSignIn = (e) => {
+      setSignValues(prev => ({...prev, [e.target.name]: [e.target.value] }))
     };
-    signIn(signInData);
- };
 
  return (
-    <form className="signin-form" onSubmit={handleSignIn}>
+    <form className="signin-form" onSubmit={handleSubmit}>
       <input
         type="email"
         placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={handleSignIn}
         className="signin-input"
+        name='email'
       />
       <input
         type="password"
         placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={handleSignIn}
         className="signin-input"
+        name='password'
       />
       <button type="submit" className="signin-button">
         Sign In
       </button>
     </form>
  );
-};
-
-SignInForm.propTypes = {
- signIn: PropTypes.func.isRequired,
 };
 
 export default SignInForm;

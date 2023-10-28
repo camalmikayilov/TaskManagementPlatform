@@ -1,63 +1,64 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useState } from "react";
 
-const UserManagement = ({ users, setUsers }) => {
- const [name, setName] = useState('');
- const [surname, setSurname] = useState('');
- const [email, setEmail] = useState('');
- const [defaultPassword, setDefaultPassword] = useState('');
+const UserManagement = () => {
+  //  const [name, setName] = useState('');
+  //  const [surname, setSurname] = useState('');
+  //  const [email, setEmail] = useState('');
+  //  const [defaultPassword, setDefaultPassword] = useState('');
 
- const handleAddUser = (e) => {
+  const [uservalues, setUserValues] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    defaultPassword: "",
+  });
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const newUser = {
-      name,
-      surname,
-      email,
-      defaultPassword,
-    };
-    setUsers([...users, newUser]);
- };
+    var usersData = JSON.parse(localStorage.getItem("usersdata") || "[]");
+    usersData.push(uservalues);
+    localStorage.setItem("usersdata", JSON.stringify(usersData));
+  };
 
- return (
-    <form className="user-form" onSubmit={handleAddUser}>
+  const handleAddUser = (e) => {
+    setUserValues((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
+  };
+
+  return (
+    <form className="user-form" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={handleAddUser}
         className="user-input"
+        name="name"
       />
       <input
         type="text"
         placeholder="Surname"
-        value={surname}
-        onChange={(e) => setSurname(e.target.value)}
+        onChange={handleAddUser}
         className="user-input"
+        name="surname"
       />
       <input
         type="email"
         placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={handleAddUser}
         className="user-input"
+        name="email"
       />
       <input
         type="password"
         placeholder="Default Password"
-        value={defaultPassword}
-        onChange={(e) => setDefaultPassword(e.target.value)}
+        onChange={handleAddUser}
         className="user-input"
+        name="defaultPassword"
       />
       <button type="submit" className="user-button">
         Add User
       </button>
     </form>
- );
-};
-
-UserManagement.propTypes = {
- users: PropTypes.array,
- setUsers: PropTypes.func,
+  );
 };
 
 export default UserManagement;

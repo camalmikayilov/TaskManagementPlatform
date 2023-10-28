@@ -1,57 +1,59 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const TaskManagement = () => {
- const [tasks, setTasks] = useState([]);
- const [title, setTitle] = useState('');
- const [description, setDescription] = useState('');
- const [deadline, setDeadline] = useState('');
- const [status, setStatus] = useState('');
+  const [taskvalues, setTaskValues] = useState({
+    title: '',
+    description: '',
+    deadline: '',
+    stat: ''
+  });
 
- const handleAddTask = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const newTask = {
-      title,
-      description,
-      deadline,
-      status,
-    };
-    setTasks([...tasks, newTask]);
- };
+    var taskData = JSON.parse(localStorage.getItem('taskdata')) || [];
+    taskData.push(taskvalues);
+    localStorage.setItem('taskdata', JSON.stringify(taskData));
+  };
 
- return (
-    <form className="task-form" onSubmit={handleAddTask}>
+  const handleAddTask = (e) => {
+    const { name, value } = e.target;
+    setTaskValues((prev) => ({ ...prev, [name]: value }));
+  };
+
+  return (
+    <form className="task-form" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={handleAddTask}
         className="task-input"
+        name="title"
       />
       <textarea
         placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={handleAddTask}
         className="task-input"
+        name="description"
       ></textarea>
       <input
         type="text"
         placeholder="Deadline"
-        value={deadline}
-        onChange={(e) => setDeadline(e.target.value)}
+        onChange={handleAddTask}
         className="task-input"
+        name="deadline"
       />
       <input
         type="text"
         placeholder="Status"
-        value={status}
-        onChange={(e) => setStatus(e.target.value)}
+        onChange={handleAddTask}
         className="task-input"
+        name="stat"
       />
       <button type="submit" className="task-button">
         Add Task
       </button>
     </form>
- );
+  );
 };
 
 export default TaskManagement;
