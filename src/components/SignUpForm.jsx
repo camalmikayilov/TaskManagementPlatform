@@ -1,68 +1,78 @@
 import { useState } from 'react';
 
 const SignUpForm = () => {
- const [organizationName, setOrganizationName] = useState('');
- const [phoneNumber, setPhoneNumber] = useState('');
- const [address, setAddress] = useState('');
- const [userName, setUserName] = useState('');
- const [email, setEmail] = useState('');
- const [password, setPassword] = useState('');
+  //  const [organizationName, setOrganizationName] = useState('');
+  //  const [phoneNumber, setPhoneNumber] = useState('');
+  //  const [address, setAddress] = useState('');
+  //  const [userName, setUserName] = useState('');
+  //  const [email, setEmail] = useState('');
+  //  const [password, setPassword] = useState('');
 
- const handleSignUp = (e) => {
+  const [signvalues, setSignValues] = useState({
+    email: '',
+    password: '',
+    username: '',
+    adress: '',
+    phoneNumber: '',
+    organizationName: ''
+  })
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Sign Up Form Data:', {
-      organizationName,
-      phoneNumber,
-      address,
-      userName,
-      email,
-      password,
-    });
- };
+    // DATANI BIRINCI CEKIB YOXLAMALISAN OLMASA ELAVE ETMELISEN LOKALA - Yoxsa her defe yeni data elave edende digerini silecek. O birisi sehifelerde de bu versiyani iwlet
+    var signData = JSON.parse(localStorage.getItem('signdata') || "[]");
+    signData.push(signvalues)
+    localStorage.setItem('signdata', JSON.stringify(signData))
+  }
 
- return (
-    <form className="signup-form" onSubmit={handleSignUp}>
+  // ONCHANGE VERDIM BULARI DAHA RAHAT YOLDU. COX DATA OLANDA STATELER QARIWIR ONA GORE SENIN STATELERI COMMENTE ALDM 1-NE YIGDIM.
+  const handleSignUp = (e) => {
+    setSignValues(prev => ({ ...prev, [e.target.name]: [e.target.value] }))
+  };
+
+  return (
+    <form className="signup-form" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Organization Name"
-        value={organizationName}
-        onChange={(e) => setOrganizationName(e.target.value)}
+        onChange={handleSignUp}
         className="signup-input"
+        name='organizationName'
       />
       <input
         type="text"
         placeholder="Phone Number"
-        value={phoneNumber}
-        onChange={(e) => setPhoneNumber(e.target.value)}
+        onChange={handleSignUp}
         className="signup-input"
+        name='phoneNumber'
       />
       <input
         type="text"
         placeholder="Address"
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
+        onChange={handleSignUp}
         className="signup-input"
+        name='adress'
       />
       <input
         type="text"
         placeholder="User Name"
-        value={userName}
-        onChange={(e) => setUserName(e.target.value)}
+        onChange={handleSignUp}
         className="signup-input"
+        name='username'
       />
       <input
         type="email"
         placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={handleSignUp}
         className="signup-input"
+        name='email'
       />
       <input
         type="password"
         placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={handleSignUp}
         className="signup-input"
+        name='password'
       />
       <button type="submit" className="signup-button">
         Sign Up

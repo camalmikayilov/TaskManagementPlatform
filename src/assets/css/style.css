@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
-    padding: 20rem;
+    /* padding: 20rem; */
   }
   
   .container {
@@ -16,7 +16,7 @@ body {
   #root {
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     height: 100vh;
   }
   
