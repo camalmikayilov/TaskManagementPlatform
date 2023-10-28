@@ -1,12 +1,6 @@
 import { useState } from 'react';
 
 const SignUpForm = () => {
-  //  const [organizationName, setOrganizationName] = useState('');
-  //  const [phoneNumber, setPhoneNumber] = useState('');
-  //  const [address, setAddress] = useState('');
-  //  const [userName, setUserName] = useState('');
-  //  const [email, setEmail] = useState('');
-  //  const [password, setPassword] = useState('');
 
   const [signvalues, setSignValues] = useState({
     email: '',

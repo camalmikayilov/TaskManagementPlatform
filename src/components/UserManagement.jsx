@@ -1,10 +1,6 @@
 import { useState } from "react";
 
 const UserManagement = () => {
-  //  const [name, setName] = useState('');
-  //  const [surname, setSurname] = useState('');
-  //  const [email, setEmail] = useState('');
-  //  const [defaultPassword, setDefaultPassword] = useState('');
 
   const [uservalues, setUserValues] = useState({
     name: "",

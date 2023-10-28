@@ -1,8 +1,6 @@
 import { useState } from 'react';
 
 const SignInForm = () => {
-//  const [email, setEmail] = React.useState('');
-//  const [password, setPassword] = React.useState('');
 
   const [signivalues, setSignValues] = useState({
   email: '',
