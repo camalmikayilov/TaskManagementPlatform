@@ -26,7 +26,7 @@ const SignInForm = () => {
     }
   };
 
-  // Handling changes in the sign-in form input fields
+  // Handling changes 
   const handleSignIn = (e) => {
     if (e.target.name === 'password' && e.target.value.length < 6) {
       setShowAlert(true);
@@ -36,7 +36,6 @@ const SignInForm = () => {
     }
   };
 
-  // Rendering the sign-in form and pop-up
   return (
     <div>
       {showAlert && (
@@ -45,7 +44,6 @@ const SignInForm = () => {
         </div>
       )}
       <form className="signin-form" onSubmit={handleSubmit}>
-        {/* Input fields for sign-in information */}
         <input
           type="email"
           placeholder="Email"

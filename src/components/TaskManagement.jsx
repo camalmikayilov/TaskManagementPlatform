@@ -56,10 +56,8 @@ const TaskManagement = () => {
     console.log("Add User logic here");
   };
 
-  // Rendering the TaskManagement component
   return (
     <div>
-        {/* Form for adding tasks */}
         <form className="task-form" onSubmit={handleSubmit}>
         <input
           type="text"
@@ -96,7 +94,6 @@ const TaskManagement = () => {
           Add Task
         </button>
       </form>
-      {/* Displaying the list of tasks */}
       <div>
         {tasks.length > 0 && (
           <table>
